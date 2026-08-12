@@ -231,15 +231,16 @@ body.menu-open .drawer { transform: none; }
 /* ============================================================
    hero
    ============================================================ */
-.hero { padding-top: clamp(2.2rem, 5vw, 3.4rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
-.hero__top { display: flex; align-items: center; gap: 1rem; margin-bottom: clamp(2.4rem, 5vw, 4rem); }
+.hero { position: relative; padding-top: clamp(1.6rem, 3vw, 2.4rem); }
+.herobelow { padding-bottom: clamp(2rem, 4vw, 3rem); }
+.hero__top { display: flex; align-items: center; gap: 1rem; margin-bottom: clamp(1.6rem, 3vw, 2.6rem); }
 .hero__top .brand svg { width: 42px; height: 42px; }
 .hero__top .brand__name { font-size: 1.15rem; }
 .hero__igbtn { margin-left: auto; }
 
 .hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: clamp(2rem, 4vw, 4rem);
   align-items: end;
 }
@@ -258,12 +259,13 @@ body.menu-open .drawer { transform: none; }
 .hero__fact span { font-size: .82rem; color: var(--ink-faint); }
 
 .hero__media { position: relative; }
+.hero__media picture { display: block; }
 .hero__media img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  max-height: min(66vh, 620px);
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  max-height: min(64vh, 640px);
   border-radius: 2px;
-  filter: saturate(.96);
 }
+.hero__cta, .hero__cue { display: none; }
 .hero__tag {
   position: absolute; left: 0; bottom: 0;
   background: var(--surface-2); color: var(--ink);
@@ -275,7 +277,7 @@ body.menu-open .drawer { transform: none; }
 
 /* quick date bar */
 .quickbar {
-  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  margin-top: clamp(1.8rem, 3vw, 2.6rem);
   background: var(--surface-2);
   border: 1px solid var(--line-soft);
   border-radius: 3px;
@@ -621,7 +623,111 @@ body.menu-open .drawer { transform: none; }
   .gallery { columns: 2; }
 }
 
+/* ============================================================
+   mobile hero — the photo IS the argument, so it takes the
+   whole first screen and the type sits on top of it
+   ============================================================ */
 @media (max-width: 900px) {
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    isolation: isolate;
+  }
+  /* the framed desktop photo becomes the full-bleed backdrop */
+  .hero__media {
+    position: absolute; inset: 0; z-index: -1;
+    margin: 0;
+  }
+  .hero__media picture,
+  .hero__media img {
+    width: 100%; height: 100%;
+    aspect-ratio: auto; max-height: none;
+    object-fit: cover; object-position: center 50%;
+    border-radius: 0;
+  }
+  .hero__media::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to top,
+        rgba(14,23,17,.96) 0%,
+        rgba(14,23,17,.93) 22%,
+        rgba(14,23,17,.72) 36%,
+        rgba(14,23,17,.24) 52%,
+        rgba(14,23,17,.04) 66%,
+        rgba(14,23,17,.42) 100%);
+  }
+  .hero__tag { display: none; }
+
+  .hero .wrap,
+  .hero__grid { width: 100%; }
+  .hero__inner {
+    flex: 1;
+    display: flex; flex-direction: column;
+    padding: 1.4rem var(--gutter) 1.6rem;
+  }
+  .hero__top { margin-bottom: 0; }
+  .hero__grid {
+    display: block;
+    margin-top: auto;   /* copy sits on the horizon, not the middle */
+  }
+
+  /* everything over the photo flips to cream */
+  .hero .brand__name { color: #F4F7F0; }
+  .hero .brand__sub  { color: rgba(244,247,240,.72); }
+  .hero .brand svg   { color: #F4F7F0; }
+  .hero__igbtn { color: #F4F7F0; border-color: rgba(244,247,240,.45); }
+  .hero__igbtn:hover { border-color: #F4F7F0; }
+  .hero__kicker {
+    color: rgba(244,247,240,.82);
+    font-size: .66rem; letter-spacing: .15em;
+    flex-wrap: nowrap; margin-bottom: .8rem;
+  }
+  .hero__kicker i { color: rgba(244,247,240,.35); }
+  /* «цілий рік» and its separator — dropped to keep the kicker on one line */
+  .hero__kicker span:last-of-type,
+  .hero__kicker i:last-of-type { display: none; }
+  .hero__copy { text-shadow: 0 1px 18px rgba(14,23,17,.5), 0 1px 3px rgba(14,23,17,.35); }
+  .hero__copy .btn { text-shadow: none; }
+  .hero h1 { color: #F4F7F0; }
+  .hero h1 em { color: #EBC99C; }                    /* the warm light from the cabin window */
+  .hero .lede {
+    color: rgba(244,247,240,.88);
+    font-size: .95rem; line-height: 1.45; max-width: 33ch;
+    margin-top: .85rem;
+  }
+  /* dropped on mobile: the pine strip directly below already carries
+     these numbers, and better */
+  .hero__facts { display: none; }
+
+  .hero__cta {
+    display: inline-flex;
+    margin-top: 1.5rem;
+    background: #F4F7F0; color: var(--pine); border-color: #F4F7F0;
+  }
+  .hero__cta:hover { background: #fff; }
+
+  .hero__cue {
+    display: flex; flex-direction: column; align-items: center; gap: .45rem;
+    padding-bottom: 1.1rem;
+    font-size: .64rem; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(244,247,240,.6);
+  }
+  .hero__cue i {
+    display: block; width: 1px; height: 26px;
+    background: linear-gradient(to bottom, rgba(244,247,240,.05), rgba(244,247,240,.75));
+    animation: cue 2.2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes cue { 0%, 100% { transform: scaleY(.45); opacity: .5; } 50% { transform: scaleY(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .hero__cue i { animation: none; } }
+
+  .herobelow { padding-top: clamp(1.6rem, 6vw, 2.4rem); }
+  .herobelow .quickbar { margin-top: 0; }
+
   .nav { display: none; }
   .burger { display: flex; }
   .topbar .btn { display: none; }
@@ -712,7 +818,8 @@ body.menu-open .drawer { transform: none; }
 <main id="top">
 
 <!-- ══════════════════════════════ hero ══════════════════════════════ -->
-<section class="hero wrap">
+<section class="hero">
+ <div class="wrap hero__inner">
   <div class="hero__top">
     <a class="brand" href="#top" aria-label="Hrust House">
       <svg viewBox="0 0 40 40" aria-hidden="true">
@@ -729,14 +836,14 @@ body.menu-open .drawer { transform: none; }
   </div>
 
   <div class="hero__grid">
-    <div>
+    <div class="hero__copy">
       <p class="hero__kicker">
         <span>с. Валя Кузьміна</span> <i>/</i>
         <span>Чернівецький район</span> <i>/</i>
         <span>цілий рік</span>
       </p>
       <h1>втеча з міста<br>за <em>15 хвилин</em></h1>
-      <p class="lede">Три окремі будиночки над лісом. Чан на вашій власній терасі, басейн з підігрівом, мангал з дровами — і жодного сусіда за стіною.</p>
+      <p class="lede">Три окремі будиночки над лісом. Чан на власній терасі, басейн з підігрівом — і жодного сусіда за стіною.</p>
 
       <div class="hero__facts">
         <div class="hero__fact"><b class="num">3</b><span>окремі будиночки</span></div>
@@ -744,18 +851,32 @@ body.menu-open .drawer { transform: none; }
         <div class="hero__fact"><b class="num">14&nbsp;км</b><span>від центру Чернівців</span></div>
         <div class="hero__fact"><b>Басейн</b><span>уже у вартості</span></div>
       </div>
+
+      <a class="btn hero__cta" href="#booking">Обрати дати</a>
     </div>
 
     <div class="hero__media">
-      <img src="img/photo/houses-path.jpg" alt="Три дерев'яні будиночки Hrust House із гравійною доріжкою між ними" width="720" height="700" fetchpriority="high">
+      <picture>
+        <!-- phone crop: hills and cabin sit above the copy block -->
+        <source media="(max-width: 900px)" srcset="img/photo/hero-mobile.jpg" width="876" height="1600">
+        <img src="img/photo/hero-desktop.jpg" alt="Будиночок Hrust House у золоту годину: гамак, зелений схил і ліс на горизонті" width="1000" height="1333" fetchpriority="high">
+      </picture>
       <div class="hero__tag">
         <b>Хруст</b>
         гравій під ногами — єдине, що тут гучне
       </div>
     </div>
   </div>
+ </div>
 
-  <!-- quick dates -->
+ <div class="hero__cue" aria-hidden="true">
+   <i></i>
+   <span>гортайте</span>
+ </div>
+</section>
+
+<!-- quick dates: inside the hero on desktop, first block below it on mobile -->
+<div class="wrap herobelow">
   <form class="quickbar" id="quickbar" autocomplete="off">
     <div class="qf">
       <label for="q-in">Заїзд</label>
@@ -775,7 +896,7 @@ body.menu-open .drawer { transform: none; }
     </div>
     <button class="btn btn--solid" type="submit">Порахувати</button>
   </form>
-</section>
+</div>
 
 <div class="gravel wrap" aria-hidden="true"></div>
 
@@ -1330,10 +1451,21 @@ body.menu-open .drawer { transform: none; }
   /* ══════════════ header + drawer + mobile bar ══════════════ */
   var topbar = $('#topbar'), mobar = $('#mobar'), drawer = $('#drawer'), burger = $('#burger');
 
+  /* Fire once the hero is genuinely behind you — on mobile the hero is a
+     full-screen photo, so a fixed pixel threshold would drop the bars on
+     top of it. */
+  var heroEl = $('.hero');
+  function stickyPoint() {
+    var h = heroEl ? heroEl.offsetHeight : 0;
+    return Math.max(320, h - 140);
+  }
+  var trigger = stickyPoint();
+  window.addEventListener('resize', function () { trigger = stickyPoint(); }, { passive: true });
+
   window.addEventListener('scroll', function () {
-    var y = window.scrollY;
-    topbar.classList.toggle('show', y > 620);
-    mobar.classList.toggle('show', y > 620);
+    var past = window.scrollY > trigger;
+    topbar.classList.toggle('show', past);
+    mobar.classList.toggle('show', past);
   }, { passive: true });
 
   function setMenu(open) {

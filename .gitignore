@@ -1,4 +1,6 @@
 .claude/
+# оригінали з Instagram — потрібні лише для перекадрування, у репозиторії зайві
+img/_source/
 Thumbs.db
 desktop.ini
 .DS_Store
