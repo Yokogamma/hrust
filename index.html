@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hrust House — втеча з міста за 15 хвилин | Валя Кузьміна, Чернівці</title>
+<meta name="description" content="Три будиночки для 2–4 осіб за 15 хвилин від Чернівців. Чан на власній терасі, басейн з підігрівом у вартості, барбекю, ліс і тиша. Бронювання онлайн.">
+<meta name="theme-color" content="#1E3A2E">
+<!-- Тестовий мокап — не індексувати, доки не погоджено з клієнтом -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600&family=Onest:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231E3A2E'/%3E%3Cpath d='M7 15.5 13 10l6 5.5V23H7z' fill='none' stroke='%23EDEFE8' stroke-width='1.8'/%3E%3Crect x='10' y='16' width='3' height='3' fill='%23EDEFE8'/%3E%3Cpath d='M23 23V10M23 13l2.5-2M23 16l2.5-2M23 19l2.5-2M23 15l-2.5-2M23 18l-2.5-2' stroke='%23EDEFE8' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   HRUST HOUSE — tokens
+   Single, deliberate light world: birch-white ground, pine ink.
+   Every colour is painted explicitly so the page renders the same
+   on a light or dark host. color-scheme is pinned for form controls.
+   ============================================================ */
+:root {
+  color-scheme: light;
+
+  --ground:      #EDEFE8;   /* birch white, green-biased */
+  --ground-deep: #E3E6DC;   /* recessed bands */
+  --surface:     #F7F8F4;   /* raised panels */
+  --surface-2:   #FFFFFF;
+
+  --ink:         #17251C;   /* deep pine, near-black */
+  --ink-soft:    #4A5A4E;   /* secondary copy */
+  --ink-faint:   #77836F;   /* captions, meta */
+
+  --line:        #CDD3C6;   /* lichen hairline */
+  --line-soft:   #DDE1D6;
+
+  --pine:        #1E3A2E;   /* brand green — every primary CTA */
+  --pine-lift:   #2A4E3D;
+  --ember:       #C2703F;   /* fire / price / heat only */
+  --ember-soft:  #F0E0D4;
+
+  --blue:        #3C5F86;
+  --grey:        #7E8279;
+  --green:       #5A6B3C;
+
+  --accent:      var(--pine);      /* shifts with the chosen cabin */
+  --accent-wash: #E0E6DD;
+
+  --shadow-s: 0 1px 2px rgba(23,37,28,.06), 0 4px 14px rgba(23,37,28,.05);
+  --shadow-m: 0 2px 6px rgba(23,37,28,.07), 0 18px 44px rgba(23,37,28,.10);
+
+  --display: "Unbounded", "Trebuchet MS", system-ui, sans-serif;
+  --body:    "Onest", "Segoe UI", system-ui, sans-serif;
+  --read:    "Spectral", Georgia, "Times New Roman", serif;
+
+  --step--1: clamp(.78rem, .76rem + .1vw, .84rem);
+  --step-0:  clamp(1rem, .96rem + .2vw, 1.09rem);
+  --step-1:  clamp(1.2rem, 1.12rem + .4vw, 1.45rem);
+  --step-2:  clamp(1.5rem, 1.32rem + .9vw, 2.1rem);
+  --step-3:  clamp(2rem, 1.6rem + 2vw, 3.3rem);
+  --step-4:  clamp(2.4rem, .6rem + 4.3vw, 5rem);
+
+  --gutter: clamp(1.15rem, 4vw, 4.5rem);
+  --wide: 1360px;
+  --rail: 68px;   /* desktop side rail width */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, iframe { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--pine);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ---------- shared primitives ---------- */
+.wrap { width: min(100% - var(--gutter) * 2, var(--wide)); margin-inline: auto; }
+
+.eyebrow {
+  font-family: var(--body);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0 0 1.1rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: background .5s ease;
+  flex: none;
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 300; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-4); line-height: .96; letter-spacing: -.035em; }
+h2 { font-size: var(--step-3); line-height: 1.03; letter-spacing: -.03em; }
+h3 { font-size: var(--step-1); line-height: 1.2; letter-spacing: -.02em; font-weight: 400; }
+h2 b, h1 b { font-weight: 600; }
+
+.lede {
+  font-family: var(--read);
+  font-size: var(--step-1);
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin: 1.4rem 0 0;
+}
+.prose { font-family: var(--read); font-weight: 300; color: var(--ink-soft); max-width: 62ch; }
+.prose p { margin: 0 0 1rem; }
+.prose p:last-child { margin-bottom: 0; }
+h2 + .prose, h2 + .lede { margin-top: 1.4rem; }
+
+.num { font-variant-numeric: tabular-nums; }
+
+/* gravel rule — the "хруст" motif, generated in JS */
+.gravel { height: 12px; background-repeat: repeat-x; background-position: center; opacity: .55; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  padding: .95rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: var(--step--1);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .22s ease, color .22s ease, border-color .22s ease, transform .22s ease;
+}
+.btn--solid { background: var(--pine); color: #F2F5EE; }
+.btn--solid:hover { background: var(--pine-lift); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn--ghost:hover { border-color: var(--ink); }
+.btn--light { background: #F2F5EE; color: var(--pine); }
+.btn--light:hover { background: #fff; }
+.btn:active { transform: translateY(1px); }
+
+/* section scaffolding */
+.section { padding-block: clamp(3.6rem, 6.2vw, 6.5rem); position: relative; }
+.section--tight { padding-block: clamp(2.6rem, 4.5vw, 4rem); }
+.section-head { max-width: 46ch; margin-bottom: clamp(2rem, 3.4vw, 3rem); }
+.section-head .lede { max-width: 48ch; }
+
+/* reveal */
+.rise { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
+.rise.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; transition: none; } }
+
+/* ============================================================
+   header
+   ============================================================ */
+.topbar {
+  position: fixed; inset: 0 0 auto; z-index: 60;
+  background: rgba(237,239,232,.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transform: translateY(-102%);
+  transition: transform .35s ease, border-color .35s ease;
+}
+.topbar.show { transform: none; border-bottom-color: var(--line-soft); }
+.topbar__in { display: flex; align-items: center; gap: 1.4rem; height: 66px; }
+.brand { display: flex; align-items: center; gap: .65rem; text-decoration: none; margin-right: auto; }
+.brand svg { width: 30px; height: 30px; color: var(--pine); flex: none; }
+.brand__name { font-family: var(--display); font-weight: 600; font-size: .95rem; letter-spacing: -.02em; }
+.brand__sub { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); display: block; margin-top: 1px; }
+
+.nav { display: flex; gap: 1.5rem; }
+.nav a {
+  text-decoration: none; font-size: .85rem; color: var(--ink-soft);
+  padding: .3rem 0; position: relative;
+}
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px;
+  background: var(--accent); transition: right .3s ease;
+}
+.nav a:hover { color: var(--ink); }
+.nav a:hover::after { right: 0; }
+
+.burger { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; align-items: center; justify-content: center; }
+.burger span { display: block; width: 16px; height: 1.5px; background: var(--ink); position: relative; transition: background .2s; }
+.burger span::before, .burger span::after { content: ""; position: absolute; left: 0; width: 16px; height: 1.5px; background: var(--ink); transition: transform .28s ease; }
+.burger span::before { top: -5px; } .burger span::after { top: 5px; }
+body.menu-open .burger span { background: transparent; }
+body.menu-open .burger span::before { transform: translateY(5px) rotate(45deg); }
+body.menu-open .burger span::after  { transform: translateY(-5px) rotate(-45deg); }
+
+.drawer {
+  position: fixed; inset: 0; z-index: 55;
+  background: var(--pine); color: #E9EFE6;
+  padding: 6rem var(--gutter) 2.5rem;
+  display: flex; flex-direction: column; gap: .2rem;
+  transform: translateY(-100%); transition: transform .42s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+}
+body.menu-open .drawer { transform: none; }
+.drawer a {
+  font-family: var(--display); font-size: 1.55rem; font-weight: 300; letter-spacing: -.02em;
+  text-decoration: none; padding: .55rem 0; border-bottom: 1px solid rgba(233,239,230,.14);
+}
+.drawer .btn { margin-top: 1.6rem; align-self: flex-start; }
+.drawer__meta { margin-top: auto; padding-top: 2rem; font-size: .85rem; color: rgba(233,239,230,.6); }
+
+/* ============================================================
+   hero
+   ============================================================ */
+.hero { padding-top: clamp(2.2rem, 5vw, 3.4rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+.hero__top { display: flex; align-items: center; gap: 1rem; margin-bottom: clamp(2.4rem, 5vw, 4rem); }
+.hero__top .brand svg { width: 42px; height: 42px; }
+.hero__top .brand__name { font-size: 1.15rem; }
+.hero__igbtn { margin-left: auto; }
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: end;
+}
+.hero__kicker {
+  font-size: var(--step--1); letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0 0 1.4rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem;
+}
+.hero__kicker i { font-style: normal; color: var(--line); }
+.hero h1 { margin-bottom: .2rem; text-wrap: normal; }   /* manual <br> — balancing would break "втеча з міста" */
+.hero h1 em { font-style: normal; font-weight: 600; color: var(--pine); }
+
+.hero__facts { display: flex; flex-wrap: wrap; gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
+.hero__fact { display: flex; flex-direction: column; gap: .15rem; }
+.hero__fact b { font-family: var(--display); font-size: 1.35rem; font-weight: 400; letter-spacing: -.02em; }
+.hero__fact span { font-size: .82rem; color: var(--ink-faint); }
+
+.hero__media { position: relative; }
+.hero__media img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  max-height: min(66vh, 620px);
+  border-radius: 2px;
+  filter: saturate(.96);
+}
+.hero__tag {
+  position: absolute; left: 0; bottom: 0;
+  background: var(--surface-2); color: var(--ink);
+  padding: .8rem 1.1rem; font-size: .8rem; line-height: 1.35;
+  box-shadow: var(--shadow-s);
+  max-width: 62%;
+}
+.hero__tag b { display: block; font-family: var(--display); font-weight: 400; font-size: .95rem; margin-bottom: .1rem; }
+
+/* quick date bar */
+.quickbar {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  box-shadow: var(--shadow-s);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr)) auto;
+  align-items: stretch;
+}
+.qf { padding: .95rem 1.2rem; border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.qf:last-of-type { border-right: 0; }
+.qf label { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-faint); }
+.qf input, .qf select {
+  border: 0; background: transparent; padding: 0;
+  font-size: .98rem; font-family: var(--body); color: var(--ink);
+  width: 100%;
+}
+.qf input::-webkit-calendar-picker-indicator { opacity: .45; cursor: pointer; }
+.quickbar .btn { border-radius: 0; margin: 0; white-space: nowrap; }
+
+/* ============================================================
+   facts strip
+   ============================================================ */
+.strip { background: var(--pine); color: #E9EFE6; }
+.strip__in { display: grid; grid-template-columns: repeat(4, 1fr); }
+.strip__cell { padding: clamp(1.8rem, 3.4vw, 2.6rem) clamp(1rem, 2vw, 2rem); border-right: 1px solid rgba(233,239,230,.15); }
+.strip__cell:last-child { border-right: 0; }
+.strip__cell b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -.03em; line-height: 1; }
+.strip__cell span { display: block; margin-top: .6rem; font-size: .84rem; color: rgba(233,239,230,.68); line-height: 1.4; }
+
+/* ============================================================
+   cabins — colour switcher
+   ============================================================ */
+.cabins__layout { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: clamp(2rem, 4.5vw, 4rem); align-items: start; }
+.cabins__stage { position: relative; }
+.cabins__photo {
+  width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: 2px;
+  transition: opacity .4s ease;
+}
+.cabins__photo.swap { opacity: 0; }
+.cabins__badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: var(--surface-2); padding: .5rem .9rem;
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;
+  display: flex; align-items: center; gap: .5rem;
+  box-shadow: var(--shadow-s);
+}
+.cabins__badge i { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); transition: background .5s ease; }
+
+.picker { display: flex; gap: .5rem; margin: 1.4rem 0 0; flex-wrap: wrap; }
+.picker button {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .7rem 1.05rem;
+  background: transparent; border: 1px solid var(--line); border-radius: 999px;
+  cursor: pointer; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500;
+  transition: border-color .25s ease, background .25s ease;
+}
+.picker button i { width: 13px; height: 13px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(23,37,28,.12); }
+.picker button[aria-pressed="true"] { border-color: var(--ink); background: var(--surface-2); }
+.picker button:hover { border-color: var(--ink-faint); }
+
+.spec { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.spec li { display: flex; gap: 1rem; padding: .78rem 0; border-bottom: 1px solid var(--line-soft); font-size: .95rem; }
+.spec li b { font-weight: 500; min-width: 8.5rem; flex: none; color: var(--ink); }
+.spec li span { color: var(--ink-soft); }
+
+/* ============================================================
+   split feature blocks
+   ============================================================ */
+.split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.split--flip .split__media { order: 2; }
+.split__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; }
+.split__media--tall img { aspect-ratio: 3/4; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
+.pill {
+  font-size: .78rem; letter-spacing: .06em;
+  padding: .45rem .85rem; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--ink-soft); background: var(--surface);
+}
+.pill--ember { border-color: var(--ember); color: var(--ember); background: transparent; }
+
+/* room tour cards */
+.tour { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem, 2.5vw, 2rem); }
+.tourcard { position: relative; display: block; text-decoration: none; overflow: hidden; border-radius: 2px; background: var(--ink); }
+.tourcard img { width: 100%; aspect-ratio: 16/11; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.3,1), opacity .4s; opacity: .82; }
+.tourcard:hover img { transform: scale(1.04); opacity: .7; }
+.tourcard__body { position: absolute; inset: auto 0 0 0; padding: 1.4rem; color: #F2F5EE; display: flex; align-items: flex-end; gap: 1rem; }
+.tourcard__body h3 { color: #F2F5EE; }
+.tourcard__body p { margin: .3rem 0 0; font-size: .82rem; color: rgba(242,245,238,.72); }
+.play { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(242,245,238,.5); display: grid; place-items: center; margin-left: auto; transition: background .25s ease; }
+.tourcard:hover .play { background: rgba(242,245,238,.16); }
+.play svg { width: 13px; height: 13px; fill: #F2F5EE; margin-left: 2px; }
+
+/* ============================================================
+   чан — the dark ritual band
+   ============================================================ */
+.tub { background: var(--pine); color: #E4EBE0; }
+.tub h2, .tub h3 { color: #F2F6EE; }
+.tub .eyebrow { color: rgba(228,235,224,.6); }
+.tub .eyebrow::before { background: var(--ember); }
+.tub .prose { color: rgba(228,235,224,.78); }
+
+.ritual { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
+.ritual__track { position: relative; height: 2px; background: rgba(228,235,224,.2); border-radius: 2px; }
+.ritual__fill { position: absolute; inset: 0 100% 0 0; background: linear-gradient(90deg, var(--ember), #E8A874); transition: right 1.6s cubic-bezier(.3,.7,.3,1); }
+.ritual.in .ritual__fill { right: 0; }
+@media (prefers-reduced-motion: reduce) { .ritual__fill { transition: none; right: 0; } }
+.ritual__marks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.1rem; }
+.ritual__mark b { display: block; font-family: var(--display); font-weight: 300; font-size: 1.5rem; letter-spacing: -.02em; color: #F2F6EE; }
+.ritual__mark span { display: block; font-size: .82rem; color: rgba(228,235,224,.6); margin-top: .25rem; }
+.ritual__mark:nth-child(2) { text-align: center; }
+.ritual__mark:nth-child(3) { text-align: right; }
+
+.tub__price {
+  display: flex; flex-wrap: wrap; gap: 1.6rem 2.6rem; margin-top: 2.4rem;
+  padding-top: 1.8rem; border-top: 1px solid rgba(228,235,224,.18);
+}
+.tub__price div b { display: block; font-family: var(--display); font-size: 1.7rem; font-weight: 300; letter-spacing: -.02em; color: var(--ember); }
+.tub__price div span { font-size: .82rem; color: rgba(228,235,224,.6); }
+
+/* ============================================================
+   gallery
+   ============================================================ */
+.gallery { columns: 3; column-gap: 12px; }
+.gallery button {
+  display: block; width: 100%; margin: 0 0 12px; padding: 0;
+  border: 0; background: none; cursor: zoom-in; break-inside: avoid;
+  border-radius: 2px; overflow: hidden;
+}
+.gallery img { width: 100%; transition: transform .7s cubic-bezier(.2,.7,.3,1), filter .4s; }
+.gallery button:hover img { transform: scale(1.03); filter: saturate(1.08); }
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(15,24,18,.94);
+  display: grid; place-items: center; padding: clamp(1rem, 4vw, 3rem);
+  opacity: 0; pointer-events: none; transition: opacity .3s ease;
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: 100%; max-height: 84vh; object-fit: contain; border-radius: 2px; }
+.lightbox__close, .lightbox__nav {
+  position: absolute; background: rgba(242,245,238,.1); border: 1px solid rgba(242,245,238,.28);
+  color: #F2F5EE; width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; font-size: 1.1rem;
+}
+.lightbox__close { top: 1.2rem; right: 1.2rem; }
+.lightbox__nav--prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lightbox__nav--next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lightbox__count { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); color: rgba(242,245,238,.7); font-size: .8rem; letter-spacing: .1em; }
+
+/* ============================================================
+   prices & rules
+   ============================================================ */
+.rates { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.ratetable { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.ratetable caption { text-align: left; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); padding-bottom: .9rem; }
+.ratetable th, .ratetable td { text-align: left; padding: 1rem .6rem; border-bottom: 1px solid var(--line-soft); }
+.ratetable th { font-weight: 500; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); border-bottom-color: var(--line); }
+.ratetable td:last-child, .ratetable th:last-child { text-align: right; }
+.ratetable .price { font-family: var(--display); font-weight: 400; font-size: 1.28rem; letter-spacing: -.02em; }
+.ratetable .price small { font-family: var(--body); font-size: .72rem; color: var(--ink-faint); letter-spacing: 0; }
+.ratetable tr.extra td { color: var(--ink-soft); }
+.ratetable tr.extra .price { font-size: 1.05rem; }
+
+.rules { display: flex; flex-direction: column; gap: 1.6rem; }
+.rulecard { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 3px; padding: 1.4rem 1.5rem; }
+.rulecard h3 { font-size: 1rem; margin-bottom: .8rem; }
+.rulecard ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.rulecard li { display: flex; gap: .8rem; font-size: .9rem; color: var(--ink-soft); }
+.rulecard li b { flex: none; min-width: 3.6rem; color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rulecard li.warn b { color: var(--ember); }
+
+/* ============================================================
+   booking
+   ============================================================ */
+.booking { background: var(--ground-deep); }
+.booking__layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.6rem, 3.5vw, 3rem); align-items: start; }
+.panel { background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: 3px; box-shadow: var(--shadow-s); }
+.panel__head { padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line-soft); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.panel__head h3 { font-size: 1.05rem; }
+.panel__body { padding: 1.5rem; }
+
+/* calendar */
+.cal__nav { margin-left: auto; display: flex; gap: .4rem; }
+.cal__nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: transparent; cursor: pointer; display: grid; place-items: center; }
+.cal__nav button:hover:not(:disabled) { border-color: var(--ink); }
+.cal__nav button:disabled { opacity: .35; cursor: not-allowed; }
+.cal__months { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.month__name { font-family: var(--display); font-weight: 400; font-size: 1rem; text-align: center; margin-bottom: .9rem; letter-spacing: -.01em; text-transform: capitalize; }
+.month__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.month__dow { font-size: .66rem; text-align: center; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .08em; padding-bottom: .4rem; }
+.day {
+  position: relative; aspect-ratio: 1; border: 0; background: transparent; cursor: pointer;
+  font-size: .84rem; font-variant-numeric: tabular-nums; border-radius: 2px;
+  display: grid; place-items: center; color: var(--ink);
+  transition: background .16s ease, color .16s ease;
+}
+.day:hover:not(:disabled) { background: var(--accent-wash); }
+.day:disabled { color: var(--line); cursor: default; }
+.day.blank { pointer-events: none; }
+.day.busy { color: var(--ink-faint); }
+.day.busy::after {
+  content: ""; position: absolute; inset: 4px;
+  background: repeating-linear-gradient(-45deg, transparent 0 3px, var(--line) 3px 4px);
+  border-radius: 2px; pointer-events: none;
+}
+.day.in-range { background: var(--accent-wash); border-radius: 0; }
+.day.edge { background: var(--accent); color: #F4F7F1; font-weight: 600; }
+.day.edge.start { border-radius: 2px 0 0 2px; }
+.day.edge.end   { border-radius: 0 2px 2px 0; }
+.day.edge.solo  { border-radius: 2px; }
+.day.today::before { content: ""; position: absolute; bottom: 5px; width: 3px; height: 3px; border-radius: 50%; background: var(--ember); }
+.day.edge.today::before { background: #F4F7F1; }
+
+.cal__legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid var(--line-soft); font-size: .76rem; color: var(--ink-faint); }
+.cal__legend span { display: flex; align-items: center; gap: .45rem; }
+.swatch { width: 13px; height: 13px; border-radius: 2px; flex: none; }
+.swatch--sel { background: var(--accent); }
+.swatch--busy { background: repeating-linear-gradient(-45deg, var(--surface) 0 3px, var(--line) 3px 4px); border: 1px solid var(--line-soft); }
+
+.note { margin-top: 1rem; font-size: .82rem; color: var(--ink-soft); background: var(--ember-soft); border-left: 2px solid var(--ember); padding: .7rem .9rem; border-radius: 0 2px 2px 0; }
+.note[hidden] { display: none; }
+
+/* form */
+.field { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+.field label { font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint); }
+.field input, .field select, .field textarea {
+  border: 1px solid var(--line); border-radius: 2px; background: var(--surface);
+  padding: .7rem .85rem; font-size: .95rem; width: 100%;
+  transition: border-color .2s ease, background .2s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus { background: var(--surface-2); border-color: var(--ink-faint); }
+.field textarea { resize: vertical; min-height: 84px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.check { display: flex; gap: .7rem; align-items: flex-start; padding: .75rem 0; border-bottom: 1px solid var(--line-soft); cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--pine); flex: none; cursor: pointer; }
+.check__txt { flex: 1; min-width: 0; }
+.check__txt b { display: block; font-weight: 500; font-size: .92rem; }
+.check__txt > span { display: block; font-size: .78rem; color: var(--ink-faint); margin-top: .1rem; }
+.check__price { font-variant-numeric: tabular-nums; font-size: .9rem; color: var(--ink-soft); white-space: nowrap; }
+
+.stepper {
+  display: flex; align-items: center; gap: .5rem;
+  margin: 0 0 .8rem 1.9rem; padding: .55rem .8rem;
+  background: var(--surface); border: 1px solid var(--line-soft); border-radius: 999px;
+  width: fit-content;
+}
+.stepper[hidden] { display: none; }
+.stepper button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); cursor: pointer; line-height: 1; flex: none; }
+.stepper button:hover { border-color: var(--ink-faint); }
+.stepper output { font-variant-numeric: tabular-nums; min-width: 1.2rem; text-align: center; font-size: .9rem; font-weight: 500; }
+.stepper em { font-style: normal; font-size: .78rem; color: var(--ink-faint); white-space: nowrap; }
+
+/* summary */
+.summary { position: sticky; top: 88px; }
+.sumline { display: flex; justify-content: space-between; gap: 1rem; padding: .62rem 0; font-size: .9rem; border-bottom: 1px solid var(--line-soft); }
+.sumline[hidden] { display: none; }
+.sumline span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sumline--muted { color: var(--ink-faint); }
+.sumline--save { color: var(--ember); }
+.sumline--total { border-bottom: 0; padding-top: 1.1rem; align-items: baseline; }
+.sumline--total b { font-family: var(--display); font-weight: 400; font-size: 1.7rem; letter-spacing: -.02em; }
+.sumline--total i { font-style: normal; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); }
+.prepay { margin-top: 1rem; padding: .9rem 1rem; background: var(--accent-wash); border-radius: 2px; font-size: .85rem; display: flex; justify-content: space-between; gap: 1rem; transition: background .5s ease; }
+.prepay b { font-variant-numeric: tabular-nums; }
+.summary .btn { width: 100%; margin-top: 1.2rem; }
+.summary__fine { font-size: .76rem; color: var(--ink-faint); margin: .9rem 0 0; line-height: 1.45; }
+
+.sent { text-align: center; padding: 2rem 1rem; }
+.sent svg { width: 44px; height: 44px; color: var(--pine); margin: 0 auto 1rem; }
+.sent h3 { margin-bottom: .5rem; }
+.sent p { font-size: .9rem; color: var(--ink-soft); margin: 0 auto; max-width: 34ch; }
+
+/* ============================================================
+   map & contacts
+   ============================================================ */
+.mapgrid { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: clamp(1.6rem, 3.5vw, 3rem); align-items: stretch; }
+.mapframe { position: relative; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; background: var(--surface); min-height: 380px; }
+.mapframe iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: saturate(.78) contrast(1.02); }
+.mapframe__tag {
+  position: absolute; left: 12px; bottom: 12px; right: 12px;
+  background: rgba(247,248,244,.94); backdrop-filter: blur(6px);
+  padding: .75rem .95rem; font-size: .78rem; color: var(--ink-soft); border-radius: 2px;
+  box-shadow: var(--shadow-s);
+}
+.mapframe__tag b { color: var(--ink); }
+
+.contacts { display: flex; flex-direction: column; gap: 0; }
+.contact {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); text-decoration: none;
+}
+.contact:first-child { padding-top: 0; }
+.contact svg { width: 20px; height: 20px; color: var(--accent); flex: none; margin-top: 2px; transition: color .5s ease; }
+.contact b { display: block; font-weight: 500; font-size: .95rem; }
+.contact span { display: block; font-size: .82rem; color: var(--ink-faint); margin-top: .1rem; }
+.contact[href]:hover b { text-decoration: underline; text-underline-offset: 3px; }
+.contacts .btn { margin-top: 1.4rem; align-self: flex-start; }
+
+/* ============================================================
+   footer
+   ============================================================ */
+.footer { background: var(--pine); color: rgba(233,239,230,.72); padding-block: clamp(3rem, 6vw, 4.5rem) 2rem; }
+.footer__top { display: grid; grid-template-columns: minmax(0,1.4fr) repeat(2, minmax(0,1fr)); gap: 2.4rem; padding-bottom: 2.6rem; border-bottom: 1px solid rgba(233,239,230,.16); }
+.footer .brand svg { color: #E9EFE6; }
+.footer .brand__name { color: #F2F6EE; }
+.footer__claim { font-family: var(--read); font-weight: 300; font-size: 1.05rem; line-height: 1.5; margin: 1.2rem 0 0; max-width: 30ch; color: rgba(233,239,230,.8); }
+.footer h4 { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(233,239,230,.5); margin: 0 0 1rem; font-weight: 600; font-family: var(--body); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; font-size: .9rem; }
+.footer a { text-decoration: none; }
+.footer a:hover { color: #F2F6EE; text-decoration: underline; text-underline-offset: 3px; }
+.footer__bottom { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding-top: 1.6rem; font-size: .78rem; color: rgba(233,239,230,.45); }
+.footer__bottom p { margin: 0; }
+.footer__bottom p:last-child { margin-left: auto; }
+
+/* ============================================================
+   mobile booking bar
+   ============================================================ */
+.mobar {
+  position: fixed; inset: auto 0 0 0; z-index: 50;
+  background: var(--surface-2); border-top: 1px solid var(--line);
+  padding: .7rem var(--gutter) calc(.7rem + env(safe-area-inset-bottom));
+  display: none; align-items: center; gap: 1rem;
+  box-shadow: 0 -6px 24px rgba(23,37,28,.08);
+  transform: translateY(110%); transition: transform .35s ease;
+}
+.mobar.show { transform: none; }
+.mobar__price b { font-family: var(--display); font-size: 1.15rem; font-weight: 400; font-variant-numeric: tabular-nums; }
+.mobar__price span { display: block; font-size: .7rem; color: var(--ink-faint); letter-spacing: .1em; text-transform: uppercase; }
+.mobar .btn { margin-left: auto; padding: .8rem 1.3rem; }
+
+/* ============================================================
+   responsive
+   ============================================================ */
+@media (max-width: 1080px) {
+  .cabins__layout, .rates, .booking__layout, .mapgrid, .split { grid-template-columns: 1fr; }
+  .split--flip .split__media { order: 0; }
+  .summary { position: static; }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__media img { aspect-ratio: 16/10; }
+  .gallery { columns: 2; }
+}
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .burger { display: flex; }
+  .topbar .btn { display: none; }
+  .strip__in { grid-template-columns: 1fr 1fr; }
+  .strip__cell:nth-child(2) { border-right: 0; }
+  .strip__cell:nth-child(-n+2) { border-bottom: 1px solid rgba(233,239,230,.15); }
+  .cal__months { grid-template-columns: 1fr; gap: 1.6rem; }
+  .tour { grid-template-columns: 1fr; }
+  .mobar { display: flex; }
+  body { padding-bottom: 72px; }
+}
+
+@media (max-width: 620px) {
+  :root { --step-4: clamp(2.1rem, 10.6vw, 3.2rem); }
+  .hero__top .hero__igbtn { display: none; }
+  .quickbar { grid-template-columns: 1fr 1fr; }
+  .qf:nth-child(2) { border-right: 0; }
+  .qf:nth-child(-n+2) { border-bottom: 1px solid var(--line-soft); }
+  .qf:nth-child(3) { grid-column: span 2; border-right: 0; border-bottom: 1px solid var(--line-soft); }
+  .quickbar .btn { grid-column: span 2; }
+  .strip__in { grid-template-columns: 1fr; }
+  .strip__cell { border-right: 0; border-bottom: 1px solid rgba(233,239,230,.15); }
+  .strip__cell:last-child { border-bottom: 0; }
+  .field-row { grid-template-columns: 1fr; }
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__bottom p:last-child { margin-left: 0; }
+  .spec li { flex-direction: column; gap: .2rem; }
+  .spec li b { min-width: 0; }
+  .ritual__marks { grid-template-columns: 1fr; gap: .8rem; }
+  .ritual__mark, .ritual__mark:nth-child(2), .ritual__mark:nth-child(3) { text-align: left; }
+  .ritual__mark { display: flex; align-items: baseline; gap: .7rem; }
+  .ritual__mark b { font-size: 1.15rem; }
+  /* gallery becomes a snap rail on phones */
+  .gallery { columns: auto; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery button { flex: 0 0 78%; margin: 0; scroll-snap-align: center; }
+  .gallery img { aspect-ratio: 3/4; object-fit: cover; }
+  .lightbox__nav { width: 40px; height: 40px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════ header ══════════════════════════════ -->
+<header class="topbar" id="topbar">
+  <div class="wrap topbar__in">
+    <a class="brand" href="#top" aria-label="Hrust House — на початок">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 18.5 13.5 10 23 18.5V31H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="8.5" y="21" width="5" height="5" fill="currentColor"/>
+        <path d="M31 31V9M31 13.5l4.5-3.5M31 19l4.5-3.5M31 24.5l4.5-3.5M31 16.5 26.5 13M31 22l-4.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name">Hrust House</span>
+        <span class="brand__sub">Валя Кузьміна</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Основна навігація">
+      <a href="#cabins">Будиночки</a>
+      <a href="#tour">Румтур</a>
+      <a href="#pool">Басейн</a>
+      <a href="#tub">Чан</a>
+      <a href="#breakfast">Сніданки</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#rates">Ціни</a>
+      <a href="#map">Як дістатися</a>
+    </nav>
+    <a class="btn btn--solid" href="#booking">Забронювати</a>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="drawer"><span></span></button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <a href="#cabins">Будиночки</a>
+  <a href="#tour">Румтур</a>
+  <a href="#pool">Басейн</a>
+  <a href="#tub">Чан</a>
+  <a href="#breakfast">Сніданки</a>
+  <a href="#events">Святкування</a>
+  <a href="#gallery">Галерея</a>
+  <a href="#rates">Ціни та умови</a>
+  <a href="#map">Як дістатися</a>
+  <a class="btn btn--light" href="#booking">Забронювати</a>
+  <p class="drawer__meta">с. Валя Кузьміна, Чернівецький р-н<br>15 хвилин від Чернівців</p>
+</div>
+
+<main id="top">
+
+<!-- ══════════════════════════════ hero ══════════════════════════════ -->
+<section class="hero wrap">
+  <div class="hero__top">
+    <a class="brand" href="#top" aria-label="Hrust House">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 18.5 13.5 10 23 18.5V31H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <rect x="8.5" y="21" width="5" height="5" fill="currentColor"/>
+        <path d="M31 31V9M31 13.5l4.5-3.5M31 19l4.5-3.5M31 24.5l4.5-3.5M31 16.5 26.5 13M31 22l-4.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand__name">Hrust House</span>
+        <span class="brand__sub">заплануй втечу з міста</span>
+      </span>
+    </a>
+    <a class="btn btn--ghost hero__igbtn" href="https://www.instagram.com/hrust_house/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+
+  <div class="hero__grid">
+    <div>
+      <p class="hero__kicker">
+        <span>с. Валя Кузьміна</span> <i>/</i>
+        <span>Чернівецький район</span> <i>/</i>
+        <span>цілий рік</span>
+      </p>
+      <h1>втеча з міста<br>за <em>15 хвилин</em></h1>
+      <p class="lede">Три окремі будиночки над лісом. Чан на вашій власній терасі, басейн з підігрівом, мангал з дровами — і жодного сусіда за стіною.</p>
+
+      <div class="hero__facts">
+        <div class="hero__fact"><b class="num">3</b><span>окремі будиночки</span></div>
+        <div class="hero__fact"><b class="num">2–4</b><span>особи в кожному</span></div>
+        <div class="hero__fact"><b class="num">14&nbsp;км</b><span>від центру Чернівців</span></div>
+        <div class="hero__fact"><b>Басейн</b><span>уже у вартості</span></div>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <img src="img/photo/houses-path.jpg" alt="Три дерев'яні будиночки Hrust House із гравійною доріжкою між ними" width="720" height="700" fetchpriority="high">
+      <div class="hero__tag">
+        <b>Хруст</b>
+        гравій під ногами — єдине, що тут гучне
+      </div>
+    </div>
+  </div>
+
+  <!-- quick dates -->
+  <form class="quickbar" id="quickbar" autocomplete="off">
+    <div class="qf">
+      <label for="q-in">Заїзд</label>
+      <input type="date" id="q-in" name="in">
+    </div>
+    <div class="qf">
+      <label for="q-out">Виїзд</label>
+      <input type="date" id="q-out" name="out">
+    </div>
+    <div class="qf">
+      <label for="q-guests">Гості</label>
+      <select id="q-guests" name="guests">
+        <option value="2">2 особи</option>
+        <option value="3">3 особи</option>
+        <option value="4">4 особи</option>
+      </select>
+    </div>
+    <button class="btn btn--solid" type="submit">Порахувати</button>
+  </form>
+</section>
+
+<div class="gravel wrap" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════ facts strip ══════════════════════════════ -->
+<section class="strip">
+  <div class="wrap strip__in">
+    <div class="strip__cell"><b class="num">15 хв</b><span>від Чернівців — без траси, без пересадок, без «доїхати б до вечора»</span></div>
+    <div class="strip__cell"><b class="num">3 будиночки</b><span>однакові до останньої розетки — різні лише кольором</span></div>
+    <div class="strip__cell"><b class="num">14:00 / 11:00</b><span>заїзд і виїзд; підтвердження — після 50% передоплати</span></div>
+    <div class="strip__cell"><b class="num">−10%</b><span>від трьох діб; учасникам бойових дій — −15%</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ cabins ══════════════════════════════ -->
+<section class="section wrap" id="cabins">
+  <div class="section-head rise">
+    <p class="eyebrow">Будиночки</p>
+    <h2>Обери <b>колір</b>,<br>решта однакова</h2>
+    <p class="lede">Три будиночки стоять поруч і облаштовані ідентично. Відрізняються тільки кухнею та диваном — синій, сірий і зелений. Ви обираєте настрій, а не планування.</p>
+  </div>
+
+  <div class="cabins__layout">
+    <div class="cabins__stage rise">
+      <img class="cabins__photo" id="cabinPhoto" src="img/photo/interior-blue.jpg" alt="Інтер'єр будиночка Blue — кухня та обідній стіл" width="500" height="436">
+      <div class="cabins__badge"><i></i><span id="cabinBadge">Hrust House Blue</span></div>
+    </div>
+
+    <div class="rise">
+      <div class="picker" role="group" aria-label="Вибір будиночка">
+        <button type="button" data-cabin="blue"  aria-pressed="true"><i style="background:#3C5F86"></i>Blue</button>
+        <button type="button" data-cabin="grey"  aria-pressed="false"><i style="background:#7E8279"></i>Grey</button>
+        <button type="button" data-cabin="green" aria-pressed="false"><i style="background:#5A6B3C"></i>Green</button>
+      </div>
+
+      <ul class="spec">
+        <li><b>Місткість</b><span>2 особи в базі, максимум 4</span></li>
+        <li><b>Кухня</b><span>варильна поверхня, мікрохвильовка, чайник, кавомашина, посуд</span></li>
+        <li><b>Кімната</b><span>обідній стіл на чотирьох, диван, шафа, кондиціонер</span></li>
+        <li><b>Тераса</b><span>власна, з чаном та виглядом на ліс</span></li>
+        <li><b>Надворі</b><span>мангал і дрова, гамак, паркування біля будиночка</span></li>
+        <li><b>Спільне</b><span>басейн з підігрівом позаду будиночків — у вартості</span></li>
+      </ul>
+
+      <div class="pill-row">
+        <span class="pill">Заїзд з 14:00</span>
+        <span class="pill">Виїзд до 11:00</span>
+        <span class="pill pill--ember">Додатковий гість +500 ₴</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gravel wrap" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════ room tour ══════════════════════════════ -->
+<section class="section wrap" id="tour">
+  <div class="section-head rise">
+    <p class="eyebrow">Румтур</p>
+    <h2>Подивіться <b>до</b>, а не після</h2>
+    <p class="lede">Два відео без монтажних хитрощів: територія комплексу і ваш будиночок зсередини — рівно те, що ви побачите, коли відчините двері.</p>
+  </div>
+
+  <div class="tour rise">
+    <a class="tourcard" href="https://www.instagram.com/hrust_house/p/DZwnQ3LDJM9/?img_index=3" target="_blank" rel="noopener">
+      <img src="img/photo/houses-lawn.jpg" alt="Територія Hrust House — три будиночки, доріжка, ліс на схилі" width="1080" height="650" loading="lazy">
+      <div class="tourcard__body">
+        <div>
+          <h3>Огляд території</h3>
+          <p>Доріжки, мангали, басейн, вигляд на схил</p>
+        </div>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 12 14"><path d="M0 0l12 7-12 7z"/></svg></span>
+      </div>
+    </a>
+
+    <a class="tourcard" href="https://www.instagram.com/hrust_house/p/DZwnQ3LDJM9/?img_index=7" target="_blank" rel="noopener">
+      <img src="img/photo/sign.jpg" alt="Табличка Hrust House Green на дерев'яній стіні з підсвіткою" width="720" height="700" loading="lazy">
+      <div class="tourcard__body">
+        <div>
+          <h3>Огляд твого будиночку</h3>
+          <p>Від таблички на стіні до розетки біля ліжка</p>
+        </div>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 12 14"><path d="M0 0l12 7-12 7z"/></svg></span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ pool ══════════════════════════════ -->
+<section class="section wrap" id="pool">
+  <div class="split">
+    <div class="split__media rise">
+      <img src="img/photo/pool-deck.jpg" alt="Басейн з підігрівом, шезлонги та парасолі позаду будиночків" width="960" height="1280" loading="lazy">
+    </div>
+    <div class="rise">
+      <p class="eyebrow">Басейн</p>
+      <h2>З підігрівом.<br><b>І вже у вартості</b></h2>
+      <div class="prose">
+        <p>Басейн розташований позаду будиночків, з видом на схил. Підігрів працює, тож сезон тут довший за календарне літо.</p>
+        <p>Доступний усім гостям комплексу — окремо доплачувати не треба, він входить у вартість проживання.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Шезлонги та парасолі</span>
+        <span class="pill">Для всіх гостей</span>
+        <span class="pill">Без доплат</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ чан ══════════════════════════════ -->
+<section class="section tub" id="tub">
+  <div class="wrap">
+    <div class="split">
+      <div class="rise">
+        <p class="eyebrow">Чан</p>
+        <h2>Три години тепла<br><b>на вашій терасі</b></h2>
+        <div class="prose">
+          <p>Чан стоїть просто на терасі вашого будиночка — не спільна зона, не черга, не сусіди. Тільки для гостей комплексу.</p>
+          <p>У вартість входить користування чаном, халати та додаткові рушники. Замовляти потрібно щонайменше за 4 години — воду треба встигнути нагріти.</p>
+        </div>
+
+        <div class="ritual rise">
+          <div class="ritual__track"><div class="ritual__fill"></div></div>
+          <div class="ritual__marks">
+            <div class="ritual__mark"><b class="num">−4 год</b><span>замовляєте заздалегідь</span></div>
+            <div class="ritual__mark"><b>Нагрів</b><span>вода готова</span></div>
+            <div class="ritual__mark"><b class="num">3 год</b><span>потім вода охолоне</span></div>
+          </div>
+        </div>
+
+        <div class="tub__price">
+          <div><b class="num">2 000 ₴</b><span>перше нагрівання</span></div>
+          <div><b class="num">1 000 ₴</b><span>повторне нагрівання</span></div>
+          <div><b>Халати</b><span>та рушники — включені</span></div>
+        </div>
+      </div>
+
+      <div class="split__media split__media--tall rise">
+        <img src="img/photo/terrace-tub.jpg" alt="Дерев'яний чан на терасі будиночка Hrust House" width="1080" height="790" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ breakfast ══════════════════════════════ -->
+<section class="section wrap" id="breakfast">
+  <div class="split split--flip">
+    <div class="split__media rise">
+      <img src="img/photo/breakfast.jpg" alt="Сніданок у Hrust House — яєчня, бекон, тости та салат" width="720" height="530" loading="lazy">
+    </div>
+    <div class="rise">
+      <p class="eyebrow">Сніданки</p>
+      <h2>Замовляєш <b>ввечері</b>,<br>снідаєш зранку</h2>
+      <div class="prose">
+        <p>Готувати у відпустці — за бажанням, а не за обов'язком. Сніданок замовляється напередодні ввечері й чекає на вас уранці — можна не перевдягатися з халата.</p>
+        <p>Меню та вартість підкажемо в переписці разом із підтвердженням бронювання.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Замовлення до вечора</span>
+        <span class="pill">Подача — зранку</span>
+        <span class="pill">−10% у Pro М'ясо для гостей</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gravel wrap" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════ events ══════════════════════════════ -->
+<section class="section wrap" id="events">
+  <div class="split">
+    <div class="split__media rise">
+      <img src="img/photo/celebration.jpg" alt="Святковий стіл із декором під шатром у Hrust House" width="720" height="400" loading="lazy">
+    </div>
+    <div class="rise">
+      <p class="eyebrow">Святкування</p>
+      <h2>Шатро, столи<br>і <b>перше весілля</b></h2>
+      <div class="prose">
+        <p>На території ставимо шатро зі столами та стільцями — для дня народження, корпоративу чи виїзної церемонії. Декор і розміщення гостей обговорюємо окремо.</p>
+      </div>
+
+      <div class="tableWrap" style="overflow-x:auto; margin-top:1.6rem;">
+        <table class="ratetable">
+          <caption>Оренда шатра</caption>
+          <tbody>
+            <tr>
+              <td>До 12–14 гостей<br><span style="color:var(--ink-faint);font-size:.82rem">столи та стільці</span></td>
+              <td class="price num">2 700 ₴</td>
+            </tr>
+            <tr>
+              <td>14–20 гостей<br><span style="color:var(--ink-faint);font-size:.82rem">столи та стільці</span></td>
+              <td class="price num">3 700 ₴</td>
+            </tr>
+            <tr class="extra">
+              <td>Кожен гість понад 12</td>
+              <td class="price num">+500 ₴</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ gallery ══════════════════════════════ -->
+<section class="section wrap" id="gallery">
+  <div class="section-head rise">
+    <p class="eyebrow">Галерея</p>
+    <h2>Як тут <b>насправді</b></h2>
+  </div>
+  <div class="gallery rise" id="gallery-grid"><!-- filled by JS --></div>
+</section>
+
+<div class="gravel wrap" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════ rates ══════════════════════════════ -->
+<section class="section wrap" id="rates">
+  <div class="section-head rise">
+    <p class="eyebrow">Ціни та умови</p>
+    <h2>Все, що треба знати<br><b>до</b> бронювання</h2>
+  </div>
+
+  <div class="rates">
+    <div class="rise">
+      <div style="overflow-x:auto">
+        <table class="ratetable">
+          <caption>Вартість проживання — за добу, за будиночок</caption>
+          <thead>
+            <tr><th scope="col">Доба</th><th scope="col">Для 2 осіб</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Понеділок — четвер</td><td class="price num">5 000 ₴</td></tr>
+            <tr><td>П'ятниця — неділя</td><td class="price num">5 500 ₴</td></tr>
+            <tr class="extra"><td>Кожен додатковий гість</td><td class="price num">+500 ₴ <small>/ добу</small></td></tr>
+            <tr class="extra"><td>Чан — перше нагрівання</td><td class="price num">2 000 ₴</td></tr>
+            <tr class="extra"><td>Чан — повторне нагрівання</td><td class="price num">1 000 ₴</td></tr>
+            <tr class="extra"><td>Басейн з підігрівом</td><td class="price">включено</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.8rem;color:var(--ink-faint);margin-top:1rem">Будиночок розрахований максимум на 4 особи. Чан оплачується окремо й замовляється мінімум за 4 години.</p>
+    </div>
+
+    <div class="rules rise">
+      <div class="rulecard">
+        <h3>Знижки</h3>
+        <ul>
+          <li><b>−10%</b><span>при бронюванні одного будиночка на три доби й більше</span></li>
+          <li><b>−15%</b><span>учасникам бойових дій</span></li>
+          <li><b>−10%</b><span>на асортимент Pro М'ясо для гостей комплексу</span></li>
+        </ul>
+      </div>
+
+      <div class="rulecard">
+        <h3>Заїзд і оплата</h3>
+        <ul>
+          <li><b>14:00</b><span>заселення</span></li>
+          <li><b>11:00</b><span>виселення</span></li>
+          <li><b>50%</b><span>передоплата — бронювання вважається підтвердженим після її отримання</span></li>
+        </ul>
+      </div>
+
+      <div class="rulecard">
+        <h3>Відміна бронювання</h3>
+        <ul>
+          <li><b>10 днів</b><span>до заїзду — оплата повертається в повному розмірі</span></li>
+          <li><b>5 днів</b><span>до заїзду — повертається 50%</span></li>
+          <li class="warn"><b>3 доби</b><span>до заїзду — оплата не повертається</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ booking ══════════════════════════════ -->
+<section class="section booking" id="booking">
+  <div class="wrap">
+    <div class="section-head rise">
+      <p class="eyebrow">Бронювання</p>
+      <h2>Оберіть дати —<br>ми <b>підтвердимо</b></h2>
+      <p class="lede">Календар показує зайнятість орієнтовно. Заявка ні до чого не зобов'язує: менеджер перевірить дати та надішле реквізити для передоплати.</p>
+    </div>
+
+    <div class="booking__layout">
+
+      <!-- calendar + form -->
+      <div>
+        <div class="panel rise" style="margin-bottom:1.4rem">
+          <div class="panel__head">
+            <h3 id="calTitle">Дати перебування</h3>
+            <div class="cal__nav">
+              <button type="button" id="calPrev" aria-label="Попередній місяць">‹</button>
+              <button type="button" id="calNext" aria-label="Наступний місяць">›</button>
+            </div>
+          </div>
+          <div class="panel__body">
+            <div class="cal__months" id="calMonths"></div>
+            <div class="cal__legend">
+              <span><i class="swatch swatch--sel"></i> обрані дати</span>
+              <span><i class="swatch swatch--busy"></i> орієнтовно зайнято</span>
+              <span>ніч рахується за днем заїзду</span>
+            </div>
+            <p class="note" id="calNote" hidden></p>
+          </div>
+        </div>
+
+        <form class="panel rise" id="bookForm" novalidate>
+          <div class="panel__head"><h3>Деталі та контакти</h3></div>
+          <div class="panel__body">
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-cabin">Будиночок</label>
+                <select id="f-cabin">
+                  <option value="blue">Blue — синій</option>
+                  <option value="grey">Grey — сірий</option>
+                  <option value="green">Green — зелений</option>
+                  <option value="any">Будь-який вільний</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-guests">Кількість гостей</label>
+                <select id="f-guests">
+                  <option value="2">2 особи</option>
+                  <option value="3">3 особи</option>
+                  <option value="4">4 особи</option>
+                </select>
+              </div>
+            </div>
+
+            <p style="font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin:1.4rem 0 .2rem">Додатково</p>
+
+            <label class="check">
+              <input type="checkbox" id="f-tub">
+              <span class="check__txt">
+                <b>Чан на терасі</b>
+                <span>перше нагрівання; замовляється за 4 години</span>
+              </span>
+              <span class="check__price num">2 000 ₴</span>
+            </label>
+            <div class="stepper" id="tubStepper" hidden>
+              <button type="button" data-step="-1" aria-label="Менше повторних нагрівань">−</button>
+              <output id="tubReheat" for="f-tub">0</output>
+              <button type="button" data-step="1" aria-label="Більше повторних нагрівань">+</button>
+              <em>повторних нагрівань · 1 000 ₴ кожне</em>
+            </div>
+
+            <label class="check">
+              <input type="checkbox" id="f-tent">
+              <span class="check__txt">
+                <b>Шатро для святкування</b>
+                <span>столи та стільці; кількість гостей уточнимо в переписці</span>
+              </span>
+              <span class="check__price num">від 2 700 ₴</span>
+            </label>
+
+            <label class="check">
+              <input type="checkbox" id="f-vet">
+              <span class="check__txt">
+                <b>Знижка учаснику бойових дій</b>
+                <span>−15%; посвідчення покажете при заїзді</span>
+              </span>
+              <span class="check__price">−15%</span>
+            </label>
+
+            <div class="field-row" style="margin-top:1.6rem">
+              <div class="field">
+                <label for="f-name">Ім'я</label>
+                <input type="text" id="f-name" name="name" placeholder="Як до вас звертатися" required>
+              </div>
+              <div class="field">
+                <label for="f-phone">Телефон</label>
+                <input type="tel" id="f-phone" name="phone" placeholder="+380 __ ___ __ __" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-msg">Побажання</label>
+              <textarea id="f-msg" name="msg" placeholder="Привід, час приїзду, декор, домашні улюбленці — усе, що варто врахувати"></textarea>
+            </div>
+
+            <p class="summary__fine">Натискаючи «Надіслати заявку», ви погоджуєтесь на обробку контактних даних для підтвердження бронювання.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- summary -->
+      <aside class="panel summary rise">
+        <div class="panel__head"><h3>Ваш розрахунок</h3></div>
+        <div class="panel__body" id="sumBody">
+          <div class="sumline sumline--muted"><span>Будиночок</span><span id="sumCabin">Blue</span></div>
+          <div class="sumline sumline--muted"><span>Дати</span><span id="sumDates">не обрано</span></div>
+          <div class="sumline" id="rowNights"><span id="sumNightsLabel">Проживання</span><span id="sumNights">—</span></div>
+          <div class="sumline sumline--muted" id="rowExtraGuest" hidden><span id="sumExtraLabel">Додаткові гості</span><span id="sumExtraGuest">—</span></div>
+          <div class="sumline sumline--muted" id="rowTub" hidden><span id="sumTubLabel">Чан</span><span id="sumTub">—</span></div>
+          <div class="sumline sumline--muted" id="rowTent" hidden><span>Шатро (від)</span><span id="sumTent">—</span></div>
+          <div class="sumline sumline--save" id="rowDiscount" hidden><span id="sumDiscLabel">Знижка</span><span id="sumDisc">—</span></div>
+
+          <div class="sumline sumline--total">
+            <i>Разом</i>
+            <b class="num" id="sumTotal">0 ₴</b>
+          </div>
+
+          <div class="prepay">
+            <span>Передоплата 50%</span>
+            <b class="num" id="sumPrepay">0 ₴</b>
+          </div>
+
+          <button class="btn btn--solid" type="submit" form="bookForm">Надіслати заявку</button>
+          <p class="summary__fine">Розрахунок орієнтовний, знижки не сумуються — застосовується більша. Остаточну суму підтвердить менеджер.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ map ══════════════════════════════ -->
+<section class="section wrap" id="map">
+  <div class="section-head rise">
+    <p class="eyebrow">Як дістатися</p>
+    <h2>Валя Кузьміна.<br><b>14 кілометрів</b> від центру</h2>
+  </div>
+
+  <div class="mapgrid">
+    <div class="mapframe rise">
+      <iframe
+        title="Мапа: с. Валя Кузьміна, Чернівецький район"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=25.9500%2C48.1500%2C26.0850%2C48.2250&amp;layer=mapnik&amp;marker=48.18569%2C26.01666"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <p class="mapframe__tag"><b>Орієнтовна локація.</b> Точні координати надсилаємо кожному гостю окремо після підтвердження бронювання.</p>
+    </div>
+
+    <div class="contacts rise">
+      <div class="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <div><b>с. Валя Кузьміна</b><span>Чернівецький район, Чернівецька область</span></div>
+      </div>
+
+      <div class="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+        <div><b>15 хвилин автомобілем</b><span>від центру Чернівців, дорогою T-26-14</span></div>
+      </div>
+
+      <a class="contact" href="https://www.instagram.com/hrust_house/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <div><b>@hrust_house</b><span>щоденні сторіз, вільні дати, меню сніданків</span></div>
+      </a>
+
+      <a class="contact" href="tel:+380000000000">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>
+        <div><b>+380 __ ___ __ __</b><span>дзвінки та Viber — телефон уточнюється</span></div>
+      </a>
+
+      <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=48.18569,26.01666" target="_blank" rel="noopener">Прокласти маршрут</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════ footer ══════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M4 18.5 13.5 10 23 18.5V31H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="8.5" y="21" width="5" height="5" fill="currentColor"/>
+            <path d="M31 31V9M31 13.5l4.5-3.5M31 19l4.5-3.5M31 24.5l4.5-3.5M31 16.5 26.5 13M31 22l-4.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span><span class="brand__name">Hrust House</span></span>
+        </a>
+        <p class="footer__claim">Заплануй втечу з міста. Ліс, чан і тиша — за п'ятнадцять хвилин від дому.</p>
+      </div>
+
+      <div>
+        <h4>Сторінка</h4>
+        <ul>
+          <li><a href="#cabins">Будиночки</a></li>
+          <li><a href="#tub">Чан</a></li>
+          <li><a href="#pool">Басейн</a></li>
+          <li><a href="#breakfast">Сніданки</a></li>
+          <li><a href="#events">Святкування</a></li>
+          <li><a href="#rates">Ціни та умови</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Зв'язок</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/hrust_house/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.threads.com/@hrust_house" target="_blank" rel="noopener">Threads</a></li>
+          <li><a href="#booking">Заявка на бронювання</a></li>
+          <li><a href="#map">Як дістатися</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>с. Валя Кузьміна, Чернівецький район</p>
+      <p>Заїзд 14:00 · Виїзд 11:00</p>
+      <p>© <span id="year">2026</span> Hrust House</p>
+    </div>
+  </div>
+</footer>
+
+<!-- mobile booking bar -->
+<div class="mobar" id="mobar">
+  <div class="mobar__price">
+    <span>Разом</span>
+    <b class="num" id="mobarTotal">від 5 000 ₴</b>
+  </div>
+  <a class="btn btn--solid" href="#booking">Обрати дати</a>
+</div>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Перегляд фото">
+  <button class="lightbox__close" id="lbClose" aria-label="Закрити">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Попереднє фото">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Наступне фото">›</button>
+  <div class="lightbox__count" id="lbCount"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ══════════════ gravel rule — the "хруст" texture ══════════════ */
+  (function gravel() {
+    var W = 340, H = 12, dots = '';
+    var seed = 7;
+    function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+    for (var i = 0; i < 150; i++) {
+      var x = (rnd() * W).toFixed(1);
+      var y = (2 + rnd() * (H - 4)).toFixed(1);
+      var r = (0.35 + rnd() * 1.05).toFixed(2);
+      var o = (0.25 + rnd() * 0.6).toFixed(2);
+      dots += '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#17251C" opacity="' + o + '"/>';
+    }
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + W + "' height='" + H + "'>" + dots + "</svg>";
+    var uri = 'url("data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg) + '")';
+    $$('.gravel').forEach(function (el) { el.style.backgroundImage = uri; });
+  })();
+
+  /* ══════════════ header + drawer + mobile bar ══════════════ */
+  var topbar = $('#topbar'), mobar = $('#mobar'), drawer = $('#drawer'), burger = $('#burger');
+
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    topbar.classList.toggle('show', y > 620);
+    mobar.classList.toggle('show', y > 620);
+  }, { passive: true });
+
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { drawer.hidden = false; }
+    else { setTimeout(function () { if (!document.body.classList.contains('menu-open')) drawer.hidden = true; }, 420); }
+  }
+  burger.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+  $$('#drawer a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  /* ══════════════ reveal on scroll ══════════════ */
+  if (reduced || !('IntersectionObserver' in window)) {
+    $$('.rise').forEach(function (el) { el.classList.add('in'); });
+    var rt = $('.ritual'); if (rt) rt.classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    $$('.rise').forEach(function (el, i) { el.style.transitionDelay = (Math.min(i % 3, 2) * 70) + 'ms'; io.observe(el); });
+  }
+
+  /* ══════════════ cabin colour switcher ══════════════ */
+  var CABINS = {
+    blue:  { label: 'Blue',  ua: 'синій',   color: '#3C5F86', wash: '#DFE5EE', photo: 'img/photo/interior-blue.jpg',  alt: "Інтер'єр будиночка Blue — синя кухня та обідній стіл" },
+    grey:  { label: 'Grey',  ua: 'сірий',   color: '#7E8279', wash: '#E5E7E1', photo: 'img/photo/interior-grey.jpg',  alt: "Інтер'єр будиночка Grey — сіра кухня та обідній стіл" },
+    green: { label: 'Green', ua: 'зелений', color: '#5A6B3C', wash: '#E3E8D9', photo: 'img/photo/interior-green.jpg', alt: "Інтер'єр будиночка Green — зелена кухня та обідній стіл" }
+  };
+  var currentCabin = 'blue';
+  var cabinPhoto = $('#cabinPhoto'), cabinBadge = $('#cabinBadge'), cabinSelect = $('#f-cabin');
+
+  function applyCabin(key, fromSelect) {
+    var c = CABINS[key];
+    var root = document.documentElement.style;
+    if (c) {
+      currentCabin = key;
+      root.setProperty('--accent', c.color);
+      root.setProperty('--accent-wash', c.wash);
+      cabinBadge.textContent = 'Hrust House ' + c.label;
+      cabinPhoto.classList.add('swap');
+      setTimeout(function () {
+        cabinPhoto.src = c.photo;
+        cabinPhoto.alt = c.alt;
+        cabinPhoto.classList.remove('swap');
+      }, reduced ? 0 : 200);
+    } else {
+      /* "будь-який вільний" — back to brand pine */
+      currentCabin = 'any';
+      root.setProperty('--accent', '#1E3A2E');
+      root.setProperty('--accent-wash', '#E0E6DD');
+    }
+    $$('.picker button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.cabin === key ? 'true' : 'false');
+    });
+    if (!fromSelect) cabinSelect.value = key;
+    recalc();
+  }
+
+  $$('.picker button').forEach(function (b) {
+    b.addEventListener('click', function () { applyCabin(b.dataset.cabin, false); });
+  });
+  cabinSelect.addEventListener('change', function () {
+    applyCabin(cabinSelect.value, true);
+    if (CABINS[cabinSelect.value]) {
+      /* keep the visual picker in sync too */
+      $$('.picker button').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.dataset.cabin === cabinSelect.value ? 'true' : 'false');
+      });
+    }
+  });
+
+  /* ══════════════ gallery ══════════════ */
+  var PHOTOS = [
+    { src: 'houses-front.jpg',    alt: 'Будиночки Hrust House із мангалом та дровами' },
+    { src: 'pool.jpg',            alt: 'Басейн з підігрівом на тлі схилу' },
+    { src: 'interior-dining.jpg', alt: "Обідня зона будиночка з панорамним вікном" },
+    { src: 'tub-forest.jpg',      alt: 'Будиночок з чаном на тлі лісу' },
+    { src: 'hammock.jpg',         alt: 'Гамак на території комплексу' },
+    { src: 'houses-summer.jpg',   alt: 'Будиночки влітку, зелений схил' },
+    { src: 'bbq.jpg',             alt: 'Барбекю та вино на терасі' },
+    { src: 'tubs-two.jpg',        alt: 'Два будиночки з чанами на терасах' },
+    { src: 'wedding.jpg',         alt: 'Виїзна церемонія у Hrust House' },
+    { src: 'houses-hill.jpg',     alt: 'Будиночок і пагорби навколо' },
+    { src: 'sign.jpg',            alt: 'Табличка Hrust House Green' },
+    { src: 'breakfast.jpg',       alt: 'Сніданок, поданий у будиночок' }
+  ];
+
+  var grid = $('#gallery-grid');
+  PHOTOS.forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Відкрити фото: ' + p.alt);
+    b.dataset.i = i;
+    b.innerHTML = '<img src="img/photo/' + p.src + '" alt="' + p.alt + '" loading="lazy">';
+    grid.appendChild(b);
+  });
+
+  var lb = $('#lightbox'), lbImg = $('#lbImg'), lbCount = $('#lbCount'), lbIndex = 0;
+  function openLb(i) {
+    lbIndex = (i + PHOTOS.length) % PHOTOS.length;
+    lbImg.src = 'img/photo/' + PHOTOS[lbIndex].src;
+    lbImg.alt = PHOTOS[lbIndex].alt;
+    lbCount.textContent = (lbIndex + 1) + ' / ' + PHOTOS.length;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (b) openLb(+b.dataset.i);
+  });
+  $('#lbClose').addEventListener('click', closeLb);
+  $('#lbPrev').addEventListener('click', function () { openLb(lbIndex - 1); });
+  $('#lbNext').addEventListener('click', function () { openLb(lbIndex + 1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') openLb(lbIndex - 1);
+    if (e.key === 'ArrowRight') openLb(lbIndex + 1);
+  });
+
+  /* ══════════════ calendar ══════════════ */
+  var MONTHS = ['січень','лютий','березень','квітень','травень','червень','липень','серпень','вересень','жовтень','листопад','грудень'];
+  var MONTHS_IN = ['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+  var DOW = ['пн','вт','ср','чт','пт','сб','нд'];
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var viewYear = today.getFullYear(), viewMonth = today.getMonth();
+  var checkIn = null, checkOut = null;
+
+  function key(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+
+  /* deterministic demo occupancy — replace with real availability data */
+  var busy = {};
+  (function seedBusy() {
+    var s = 20260812;
+    function rnd() { s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; }
+    var cur = new Date(today);
+    for (var i = 0; i < 200; i++) {
+      var dow = cur.getDay();
+      var chance = (dow === 5 || dow === 6) ? 0.34 : 0.10;
+      if (rnd() < chance) {
+        var len = 1 + Math.floor(rnd() * 2);
+        for (var j = 0; j < len; j++) busy[key(addDays(cur, j))] = true;
+      }
+      cur = addDays(cur, 1);
+    }
+  })();
+
+  function isBusy(d) { return !!busy[key(d)]; }
+
+  function rateFor(d) {
+    var dow = d.getDay();                 /* 0 = нд, 5 = пт, 6 = сб */
+    return (dow === 5 || dow === 6 || dow === 0) ? 5500 : 5000;
+  }
+
+  function buildMonth(y, m) {
+    var wrap = document.createElement('div');
+    var h = document.createElement('div');
+    h.className = 'month__name';
+    h.textContent = MONTHS[m] + ' ' + y;
+    wrap.appendChild(h);
+
+    var g = document.createElement('div');
+    g.className = 'month__grid';
+    DOW.forEach(function (d) {
+      var c = document.createElement('div'); c.className = 'month__dow'; c.textContent = d; g.appendChild(c);
+    });
+
+    var first = new Date(y, m, 1);
+    var lead = (first.getDay() + 6) % 7;          /* monday-first */
+    var days = new Date(y, m + 1, 0).getDate();
+
+    for (var i = 0; i < lead; i++) {
+      var b = document.createElement('div'); b.className = 'day blank'; g.appendChild(b);
+    }
+
+    for (var dnum = 1; dnum <= days; dnum++) {
+      var date = new Date(y, m, dnum);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'day';
+      btn.textContent = dnum;
+      btn.dataset.date = key(date);
+
+      /* Busy days are marked but stay clickable: occupancy is advisory, and a
+         departure date never occupies a night anyway. */
+      if (date < today) { btn.disabled = true; }
+      else if (isBusy(date)) { btn.classList.add('busy'); btn.title = 'Орієнтовно зайнято — заявку все одно можна надіслати'; }
+
+      if (key(date) === key(today)) btn.classList.add('today');
+
+      if (checkIn && checkOut) {
+        if (date > checkIn && date < checkOut) btn.classList.add('in-range');
+      }
+      if (checkIn && key(date) === key(checkIn)) {
+        btn.classList.add('edge', checkOut ? 'start' : 'solo');
+        btn.classList.remove('busy');
+      }
+      if (checkOut && key(date) === key(checkOut)) {
+        btn.classList.add('edge', 'end');
+        btn.classList.remove('busy');
+      }
+
+      g.appendChild(btn);
+    }
+
+    wrap.appendChild(g);
+    return wrap;
+  }
+
+  var calMonths = $('#calMonths'), calNote = $('#calNote');
+  var twoUp = window.matchMedia('(min-width: 901px)');
+
+  function renderCal() {
+    calMonths.innerHTML = '';
+    calMonths.appendChild(buildMonth(viewYear, viewMonth));
+    if (twoUp.matches) {
+      var n = new Date(viewYear, viewMonth + 1, 1);
+      calMonths.appendChild(buildMonth(n.getFullYear(), n.getMonth()));
+    }
+    var atStart = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+    $('#calPrev').disabled = atStart;
+  }
+  twoUp.addEventListener('change', renderCal);
+
+  $('#calPrev').addEventListener('click', function () {
+    var d = new Date(viewYear, viewMonth - 1, 1);
+    viewYear = d.getFullYear(); viewMonth = d.getMonth(); renderCal();
+  });
+  $('#calNext').addEventListener('click', function () {
+    var d = new Date(viewYear, viewMonth + 1, 1);
+    viewYear = d.getFullYear(); viewMonth = d.getMonth(); renderCal();
+  });
+
+  calMonths.addEventListener('click', function (e) {
+    var b = e.target.closest('.day'); if (!b || b.disabled || b.classList.contains('blank')) return;
+    var parts = b.dataset.date.split('-');
+    var d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+
+    if (!checkIn || checkOut || d <= checkIn) { checkIn = d; checkOut = null; }
+    else { checkOut = d; }
+
+    renderCal();
+    syncQuickbar();
+    recalc();
+  });
+
+  function syncQuickbar() {
+    function iso(d) {
+      if (!d) return '';
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    $('#q-in').value = iso(checkIn);
+    $('#q-out').value = iso(checkOut);
+  }
+
+  /* quickbar → calendar */
+  $('#quickbar').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var vi = $('#q-in').value, vo = $('#q-out').value;
+    if (vi) { var a = vi.split('-'); checkIn = new Date(+a[0], +a[1] - 1, +a[2]); }
+    if (vo) { var b = vo.split('-'); checkOut = new Date(+b[0], +b[1] - 1, +b[2]); }
+    if (checkIn && checkOut && checkOut <= checkIn) checkOut = null;
+    if (checkIn) { viewYear = checkIn.getFullYear(); viewMonth = checkIn.getMonth(); }
+    $('#f-guests').value = $('#q-guests').value;
+    renderCal(); recalc();
+    document.getElementById('booking').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
+  $('#q-guests').addEventListener('change', function () { $('#f-guests').value = this.value; recalc(); });
+
+  /* ══════════════ чан stepper ══════════════ */
+  var tubCheck = $('#f-tub'), tubStepper = $('#tubStepper'), tubReheat = $('#tubReheat'), reheats = 0;
+  tubCheck.addEventListener('change', function () {
+    tubStepper.hidden = !tubCheck.checked;
+    if (!tubCheck.checked) { reheats = 0; tubReheat.textContent = '0'; }
+    recalc();
+  });
+  tubStepper.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    e.preventDefault();
+    reheats = Math.max(0, Math.min(6, reheats + (+b.dataset.step)));
+    tubReheat.textContent = reheats;
+    recalc();
+  });
+
+  /* ══════════════ price engine ══════════════ */
+  function money(n) { return new Intl.NumberFormat('uk-UA').format(Math.round(n)) + ' ₴'; }
+  function nightsWord(n) {
+    var t = n % 10, h = n % 100;
+    if (t === 1 && h !== 11) return 'ніч';
+    if (t >= 2 && t <= 4 && (h < 12 || h > 14)) return 'ночі';
+    return 'ночей';
+  }
+  function fmtDate(d) { return d.getDate() + ' ' + MONTHS_IN[d.getMonth()]; }
+
+  var els = {
+    cabin: $('#sumCabin'), dates: $('#sumDates'),
+    nightsLabel: $('#sumNightsLabel'), nights: $('#sumNights'),
+    extraRow: $('#rowExtraGuest'), extraLabel: $('#sumExtraLabel'), extra: $('#sumExtraGuest'),
+    tubRow: $('#rowTub'), tubLabel: $('#sumTubLabel'), tub: $('#sumTub'),
+    tentRow: $('#rowTent'), tent: $('#sumTent'),
+    discRow: $('#rowDiscount'), discLabel: $('#sumDiscLabel'), disc: $('#sumDisc'),
+    total: $('#sumTotal'), prepay: $('#sumPrepay'), mobar: $('#mobarTotal')
+  };
+
+  function recalc() {
+    var guests = +$('#f-guests').value;
+    var cabinKey = cabinSelect.value;
+    els.cabin.textContent = CABINS[cabinKey] ? ('Hrust House ' + CABINS[cabinKey].label) : 'Будь-який вільний';
+
+    /* nights */
+    var nights = 0, stay = 0, spansBusy = false;
+    if (checkIn && checkOut) {
+      var cur = new Date(checkIn);
+      while (cur < checkOut) {
+        stay += rateFor(cur);
+        if (isBusy(cur)) spansBusy = true;
+        nights++;
+        cur = addDays(cur, 1);
+      }
+    }
+
+    if (nights) {
+      els.dates.textContent = fmtDate(checkIn) + ' → ' + fmtDate(checkOut);
+      els.nightsLabel.textContent = 'Проживання · ' + nights + ' ' + nightsWord(nights);
+      els.nights.textContent = money(stay);
+    } else if (checkIn) {
+      els.dates.textContent = fmtDate(checkIn) + ' → оберіть виїзд';
+      els.nightsLabel.textContent = 'Проживання';
+      els.nights.textContent = '—';
+    } else {
+      els.dates.textContent = 'не обрано';
+      els.nightsLabel.textContent = 'Проживання';
+      els.nights.textContent = '—';
+    }
+
+    /* extra guests */
+    var extraGuests = Math.max(0, guests - 2);
+    var extraCost = extraGuests * 500 * nights;
+    els.extraRow.hidden = !(extraGuests && nights);
+    els.extraLabel.textContent = 'Додаткові гості · ' + extraGuests + ' × 500 ₴ × ' + nights;
+    els.extra.textContent = money(extraCost);
+
+    /* чан */
+    var tubCost = tubCheck.checked ? 2000 + reheats * 1000 : 0;
+    els.tubRow.hidden = !tubCheck.checked;
+    els.tubLabel.textContent = 'Чан' + (reheats ? ' · +' + reheats + ' нагрів.' : '');
+    els.tub.textContent = money(tubCost);
+
+    /* шатро */
+    var tentCost = $('#f-tent').checked ? 2700 : 0;
+    els.tentRow.hidden = !$('#f-tent').checked;
+    els.tent.textContent = money(tentCost);
+
+    /* discounts apply to the stay only, and do not stack — the larger one wins */
+    var pct = 0, label = '';
+    if (nights >= 3) { pct = 10; label = 'від 3 діб'; }
+    if ($('#f-vet').checked && 15 > pct) { pct = 15; label = 'учасник бойових дій'; }
+    var discount = Math.round(stay * pct / 100);
+    els.discRow.hidden = !(discount > 0);
+    els.discLabel.textContent = 'Знижка ' + pct + '% · ' + label;
+    els.disc.textContent = '−' + money(discount);
+
+    var total = stay - discount + extraCost + tubCost + tentCost;
+    els.total.textContent = money(total);
+    els.prepay.textContent = money(total / 2);
+    els.mobar.textContent = nights ? money(total) : 'від 5 000 ₴';
+
+    calNote.hidden = !spansBusy;
+    if (spansBusy) calNote.textContent = 'У вибраному діапазоні є орієнтовно зайняті дати. Заявку все одно можна надіслати — ми перевіримо й запропонуємо найближчі вільні.';
+  }
+
+  ['#f-guests', '#f-tent', '#f-vet'].forEach(function (s) {
+    $(s).addEventListener('change', recalc);
+  });
+
+  /* ══════════════ form submit (mockup — no backend) ══════════════ */
+  $('#bookForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('#f-name').value.trim(), phone = $('#f-phone').value.trim();
+    if (!name || !phone) {
+      (!name ? $('#f-name') : $('#f-phone')).focus();
+      alert('Вкажіть, будь ласка, імʼя та телефон — без них ми не зможемо підтвердити бронювання.');
+      return;
+    }
+    if (!checkIn || !checkOut) {
+      document.getElementById('booking').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+      alert('Оберіть, будь ласка, дати заїзду та виїзду в календарі.');
+      return;
+    }
+    $('#sumBody').innerHTML =
+      '<div class="sent">' +
+        '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="24" r="21"/><path d="m15 24.5 6.5 6.5L33 18"/></svg>' +
+        '<h3>Заявку надіслано</h3>' +
+        '<p>' + name + ', ми отримали ваш запит на ' + fmtDate(checkIn) + ' → ' + fmtDate(checkOut) +
+        '. Менеджер звʼяжеться протягом години й надішле реквізити для передоплати 50%.</p>' +
+      '</div>';
+    $('#sumBody').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+  });
+
+  /* ══════════════ init ══════════════ */
+  $('#year').textContent = new Date().getFullYear();
+  renderCal();
+  recalc();
+})();
+</script>
+</body>
+</html>

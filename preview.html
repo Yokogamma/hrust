@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hrust House — мокап: десктоп і мобільна версія</title>
+<style>
+  :root { color-scheme: light; --ink:#17251C; --muted:#77836F; --line:#CDD3C6; --bg:#E3E6DC; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+    padding: 22px;
+  }
+  h1 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 4px; font-weight: 600; }
+  p.sub { margin: 0 0 20px; color: var(--muted); font-size: 13px; }
+  .stage { display: flex; gap: 22px; align-items: flex-start; }
+  .col { flex: 0 0 auto; }
+  .label { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; gap: 10px; align-items: baseline; }
+  .label b { color: var(--ink); font-weight: 600; }
+  .screen { background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; box-shadow: 0 10px 40px rgba(23,37,28,.14); }
+  .screen.phone { border-radius: 26px; padding: 10px; background: #17251C; border: 0; }
+  .screen.phone iframe { border-radius: 18px; }
+  iframe { border: 0; display: block; background: #EDEFE8; }
+  .desk { width: 1280px; height: 880px; }
+  .mob  { width: 390px;  height: 844px; }
+  @media (max-width: 1800px) { .stage { flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+  <h1>Hrust House — мокап лендингу</h1>
+  <p class="sub">Обидва вікна показують один і той самий файл <code>index.html</code>. Прокручуються незалежно.</p>
+
+  <div class="stage">
+    <div class="col">
+      <div class="label"><b>Десктоп</b> 1280 × 880</div>
+      <div class="screen"><iframe class="desk" src="index.html" title="Десктопна версія"></iframe></div>
+    </div>
+    <div class="col">
+      <div class="label"><b>Мобільна</b> 390 × 844</div>
+      <div class="screen phone"><iframe class="mob" src="index.html" title="Мобільна версія"></iframe></div>
+    </div>
+  </div>
+</body>
+</html>
